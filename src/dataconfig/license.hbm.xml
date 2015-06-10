@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+        '-//Hibernate/Hibernate Mapping DTD 3.0//EN'  
+        'http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd'>  
+<hibernate-mapping>  
+    <class name="com.lj.taosserver.model.data.LicenseModel" table="license_info">  
+        <id name="id">  
+            <generator class="identity"/>  
+        </id>  
+        <property name="licenseSerial" column="l_serial" type="java.lang.String"></property>
+        <property name="enable" column="l_enable" type="boolean"></property> 
+        <property name="expire" column="l_expire" type="int"></property>  
+        <property name="createTime" column="l_create_time" type="java.util.Date"></property>  
+        <property name="lastTime" column="l_last_time" type="java.util.Date"></property>
+        
+        <one-to-one name="restaurantModel"/>  
+    </class>  
+</hibernate-mapping>  

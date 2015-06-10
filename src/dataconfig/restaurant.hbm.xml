@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+        '-//Hibernate/Hibernate Mapping DTD 3.0//EN'  
+        'http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd'>  
+<hibernate-mapping>  
+    <class name="com.lj.taosserver.model.data.RestaurantModel" table="restaurant_info">  
+        <id name="id">  
+            <generator class="foreign">
+            	<param name="property">licenseModel</param>
+            </generator>
+        </id>  
+        <property name="name" column="r_name" type="java.lang.String"></property>  
+        <property name="address" column="r_address" type="java.lang.String"></property>  
+        <property name="phone" column="r_phone" type="java.lang.String"></property>  
+        
+        <one-to-one name="licenseModel" constrained="true"/>
+    </class>  
+</hibernate-mapping>  

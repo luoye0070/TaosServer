@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+<!DOCTYPE hibernate-mapping PUBLIC  
+        '-//Hibernate/Hibernate Mapping DTD 3.0//EN'  
+        'http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd'>  
+<hibernate-mapping>  
+    <class name="com.lj.taosserver.model.data.DailyReportModel" table="daily_report_info" lazy="true">  
+        <id name="id">  
+            <generator class="identity"/>  
+        </id>  
+        <property name="totalCount" column="d_total_count" type="int"></property> 
+        <property name="availableCount" column="d_available_count" type="int"></property> 
+        <property name="date" column="d_date" type="java.util.Date"></property>
+        
+        <many-to-one name="restaurantModel" column="d_restaurant"/>  
+    </class>  
+</hibernate-mapping>  

@@ -3,7 +3,7 @@
         '-//Hibernate/Hibernate Mapping DTD 3.0//EN'  
         'http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd'>  
 <hibernate-mapping>  
-    <class name="com.lj.taosserver.model.data.RestaurantModel" table="restaurant_info">  
+    <class name="com.lj.taosserver.model.data.RestaurantModel" table="restaurant_info" lazy="false">  
         <id name="id">  
             <generator class="foreign">
             	<param name="property">licenseModel</param>
@@ -11,7 +11,18 @@
         </id>  
         <property name="name" column="r_name" type="java.lang.String"></property>  
         <property name="address" column="r_address" type="java.lang.String"></property>  
-        <property name="phone" column="r_phone" type="java.lang.String"></property>  
+        <property name="phone" column="r_phone" type="java.lang.String"></property> 
+        <property name="longitude" column="r_longitude" type="double"></property>
+        <property name="latitude" column="r_latitude" type="double"></property>
+        <property name="shopHoursBeginTime" column="r_shophoursbegintime" type="java.util.Date"></property>
+        <property name="shopHoursEndTime" column="r_shophoursendtime" type="java.util.Date"></property>
+        <property name="enabled" column="r_enabled" type="boolean"></property>
+        <property name="cuisineName" column="r_cuisinename" type="java.lang.String"></property>
+        <property name="averageConsume" column="r_averageconsume" type="double"></property>
+        <property name="description" column="r_description" type="java.lang.String"></property> 
+        <property name="baseUrl" column="r_baseurl" type="java.lang.String"></property> 
+        <property name="intervalTime" column="r_intervaltime" type="int"></property> 
+        <property name="updateTime" column="r_updatetime" type="java.util.Date"></property> 
         
         <one-to-one name="licenseModel" constrained="true"/>
     </class>  

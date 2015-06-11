@@ -1,6 +1,7 @@
 package com.lj.taosserver.data.dao.impl;
 
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -171,7 +172,7 @@ public class SimpleDao implements SaveDao, SearchDao, DeleteDao,UpdateDao {
 	}
 
 	@Override
-	public int findAll(AbstractModel condition, AbstractModel result) {
+	public int findAll(AbstractModel condition, Object result) {
 		if(condition instanceof DataModel){//删除和DataModel值相同的记录
 			System.out.println("is DataModel");
 			
@@ -235,8 +236,11 @@ public class SimpleDao implements SaveDao, SearchDao, DeleteDao,UpdateDao {
 						hqlStr+=" and r."+fieldName+"="+value;
 					}if ("Date".equals(fieldType)) {
 						Date value=(Date) field.get(condition);
-						hqlStr+=" and r."+fieldName+"="+value;
-					}else{
+						SimpleDateFormat sdtf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+						if(value!=null){
+							hqlStr+=" and r."+fieldName+"='"+sdtf.format(value)+"'";
+						}
+					}else if ("String".equals(fieldType)) {
 						String value=null;
 						try{
 							value=(String) field.get(condition);
@@ -265,10 +269,10 @@ public class SimpleDao implements SaveDao, SearchDao, DeleteDao,UpdateDao {
 				List<DataModel> resultList=session.createQuery(hqlStr).list();
 				session.getTransaction().commit();
 				int count=resultList.size();
-				ResultModel resultModel=new ResultModel(){};
+				ResultModel resultModel=(ResultModel)result;
 				resultModel.setCount(count);
 				resultModel.setDataModelList(resultList);
-				result=resultModel;
+				//result=resultModel;
 				return count;
 			}catch(Exception ex){
 				session.getTransaction().rollback();

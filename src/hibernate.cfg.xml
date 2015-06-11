@@ -53,6 +53,7 @@
 
         <mapping resource="dataconfig/restaurant.hbm.xml"/>
         <mapping resource="dataconfig/license.hbm.xml"/>
+        <mapping resource="dataconfig/dailyreport.hbm.xml"/>
 
     </session-factory>
 

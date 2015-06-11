@@ -48,5 +48,12 @@ public class LicenseModel extends DataModel {
 	public void setLastTime(Date lastTime) {
 		this.lastTime = lastTime;
 	}
+	@Override
+	public String toString() {
+		return "LicenseModel [licenseSerial=" + licenseSerial + ", enable=" + enable
+				+ ", expire=" + expire + ", createTime=" + createTime
+				+ ", lastTime=" + lastTime + ", id=" + id
+				+ "]";
+	}
 	
 }

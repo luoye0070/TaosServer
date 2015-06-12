@@ -38,7 +38,8 @@ public class Test {
 	@RequestMapping("/three")
 	public void testThree(HttpServletResponse response){
 		try {
-			response.getWriter().println("three");
+			//response.setCharacterEncoding("utf-8");
+			response.getWriter().println("第三个测试");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,10 +54,11 @@ public class Test {
 	}
 	@RequestMapping("/model")
 	public String testModel(HttpServletResponse response,final RestaurantModel restaurantModel, Errors errors,Model model){
-		
+		//response.setCharacterEncoding("utf-8");
 		LOG.info("errors.getErrorCount()->"+errors.getErrorCount());
 		//model.addAttribute("dailyReport", dailyReport);
 		model.addAttribute("restaurantModel", restaurantModel);
+		model.addAttribute("test", "测试啦");
 		//LOG.info("dailyReport-->"+dailyReport);
 		LOG.info("restaurantModel-->"+restaurantModel);
 		

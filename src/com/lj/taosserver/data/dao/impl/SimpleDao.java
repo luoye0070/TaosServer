@@ -23,8 +23,19 @@ public class SimpleDao implements SaveDao, SearchDao, DeleteDao,UpdateDao {
 	
 	private Configuration cfg =null;
 	private SessionFactory factory = null;
+	
+	public SessionFactory getFactory() {
+		return factory;
+	}
+	public void setFactory(SessionFactory factory) {
+		this.factory = factory;
+	}
+	
 	public SimpleDao(){
-		cfg =new Configuration().configure();
+		
+	}
+	public SimpleDao(String configPath){
+		cfg =new Configuration().configure(configPath);
 		factory=cfg.buildSessionFactory();
 	}
 	

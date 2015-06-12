@@ -3,7 +3,10 @@ package com.lj.taosserver.test;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
 import com.lj.taosserver.data.dao.SaveDao;
+import com.lj.taosserver.data.dao.SearchDao;
 import com.lj.taosserver.data.dao.impl.SimpleDao;
 import com.lj.taosserver.model.DataModel;
 import com.lj.taosserver.model.ResultModel;
@@ -60,10 +63,19 @@ public class Test {
 		dataModel.setTotalCount(100);
 		dataModel.setDate(new Date());
 		
-		SaveDao saveDao=new SimpleDao();
+		SaveDao saveDao=new SimpleDao("dataconfig/hibernate.cfg.xml");
 		saveDao.save(dataModel);
 		
 		System.out.println("DailyReportModel->"+dataModel);
+		
+		
+		ClassPathXmlApplicationContext appContext = 
+                new ClassPathXmlApplicationContext(new String[] {"springconfig/applicationContext.xml"});
+		SearchDao searchDao=(SearchDao) appContext.getBean("simpleDao");
+		
+		DailyReportModel dataModel1=(DailyReportModel) searchDao.get(DailyReportModel.class, 1);
+		System.out.println("DailyReportModel1->"+dataModel1);
+		
 		
 	}
 }

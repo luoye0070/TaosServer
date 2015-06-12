@@ -4,32 +4,38 @@
         xmlns:aop="http://www.springframework.org/schema/aop"
         xmlns:tx="http://www.springframework.org/schema/tx"
         xsi:schemaLocation="
-            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
-            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
-            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+            http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+            http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd">
  
     <!-- 采用hibernate.cfg.xml方式配置数据源 -->
-    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
         <property name="configLocation">
             <value>classpath:dataconfig/hibernate.cfg.xml</value>
         </property>
     </bean>
      
     <!-- 将事务与Hibernate关联 -->
-    <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+    <!-- <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
         <property name="sessionFactory">
             <ref local="sessionFactory"/>
         </property>
-    </bean>
+    </bean> -->
      
     <!-- 事务（注解 ）-->
-    <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
- 
+    <!-- <tx:annotation-driven transaction-manager="transactionManager" proxy-target-class="true"/>
+  -->
    <!-- 测试Service -->
-   <bean id="loginService" class="service.LoginService"></bean>
+   <!-- <bean id="loginService" class="service.LoginService"></bean> -->
  
+ 
+	 <!-- json转换器 -->
+	<bean id="jsonConverter" class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">  
+		<property name="supportedMediaTypes" value="application/json" />
+	</bean>
+
     <!-- 测试Dao -->
-    <bean id="hibernateDao" class="dao.HibernateDao">
-        <property name="sessionFactory" ref="sessionFactory"></property>
+    <bean id="simpleDao" class="com.lj.taosserver.data.dao.impl.SimpleDao">
+        <property name="factory" ref="sessionFactory"></property>
     </bean>
 </beans>

@@ -9,7 +9,7 @@ import com.lj.taosserver.service.LicenseGenerator;
 public class SimpleLicenseGenerator implements LicenseGenerator {
 
 	@Override
-	public LicenseModel generator() {
+	public LicenseModel generate() {
 		LicenseModel licenseModel=new LicenseModel();
 		licenseModel.setLicenseSerial(UUID.randomUUID().toString());
 		licenseModel.setCreateTime(new Date());

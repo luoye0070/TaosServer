@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lj.taosserver.model.data.DailyReportModel;
+import com.lj.taosserver.model.data.LicenseModel;
 import com.lj.taosserver.model.data.RestaurantModel;
+import com.lj.taosserver.service.LicenseGenerator;
+import com.lj.taosserver.service.impl.SimpleLicenseGenerator;
 
 @Controller
 @RequestMapping("/test")
@@ -32,8 +35,11 @@ public class Test {
 	}
 	@RequestMapping("/two")
 	@ResponseBody
-	public DailyReportModel testtwo(){
-		return new DailyReportModel();
+	public LicenseModel testtwo(){
+		LicenseGenerator lg=new SimpleLicenseGenerator();
+		LicenseModel lm=(LicenseModel) lg.generate();
+		
+		return lm;
 	}
 	@RequestMapping("/three")
 	public void testThree(HttpServletResponse response){

@@ -5,12 +5,12 @@ import java.util.Date;
 import com.lj.taosserver.model.DataModel;
 
 public class LicenseModel extends DataModel {
-	private RestaurantModel restaurantModel;
-	private String licenseSerial;//标示的序列化字符串
-	private boolean enable;//是否有效
-	private int expire;//有效期时间，单位天
-	private Date createTime;//创建时间
-	private Date lastTime;//最后访问时间
+	protected RestaurantModel restaurantModel;
+	protected String licenseSerial;//标示的序列化字符串
+	protected boolean enable;//是否有效
+	protected int expire;//有效期时间，单位天
+	protected Date createTime;//创建时间
+	protected Date lastTime;//最后访问时间
 	
 	public RestaurantModel getRestaurantModel() {
 		return restaurantModel;

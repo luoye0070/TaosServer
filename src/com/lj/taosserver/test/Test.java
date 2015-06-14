@@ -54,7 +54,7 @@ public class Test {
 		
 		
 		LicenseGenerator licenseGenerator=new SimpleLicenseGenerator();
-		LicenseModel licenseModelG=(LicenseModel) licenseGenerator.generator();
+		LicenseModel licenseModelG=(LicenseModel) licenseGenerator.generate();
 		System.out.println("licenseModelG::"+licenseModelG);
 		
 		DailyReportModel dataModel=new DailyReportModel();

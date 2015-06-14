@@ -9,6 +9,8 @@ public class DailyReportModel extends DataModel {
 	private Date date;
 	private int totalCount;
 	private int availableCount;
+	private int completeCount;
+	
 	public RestaurantModel getRestaurantModel() {
 		return restaurantModel;
 	}
@@ -33,11 +35,18 @@ public class DailyReportModel extends DataModel {
 	public void setAvailableCount(int availableCount) {
 		this.availableCount = availableCount;
 	}
+	public int getCompleteCount() {
+		return completeCount;
+	}
+	public void setCompleteCount(int completeCount) {
+		this.completeCount = completeCount;
+	}
 	@Override
 	public String toString() {
 		return "DailyReportModel [restaurantModel=" + restaurantModel
 				+ ", date=" + date + ", totalCount=" + totalCount
-				+ ", availableCount=" + availableCount + ", id=" + id + "]";
+				+ ", availableCount=" + availableCount + ", completeCount="
+				+ completeCount + "]";
 	}
 	
 	

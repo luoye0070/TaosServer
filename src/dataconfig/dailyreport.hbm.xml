@@ -8,7 +8,8 @@
             <generator class="identity"/>  
         </id>  
         <property name="totalCount" column="d_total_count" type="int"></property> 
-        <property name="availableCount" column="d_available_count" type="int"></property> 
+        <property name="availableCount" column="d_available_count" type="int"></property>
+        <property name="completeCount" column="d_complete_count" type="int"></property>  
         <property name="date" column="d_date" type="java.util.Date"></property>
         
         <many-to-one name="restaurantModel" column="d_restaurant"/>  

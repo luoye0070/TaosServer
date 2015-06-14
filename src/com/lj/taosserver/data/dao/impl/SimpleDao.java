@@ -350,5 +350,15 @@ public class SimpleDao implements SaveDao, SearchDao, DeleteDao,UpdateDao {
 		}
 		return false;
 	}
+	@Override
+	public AbstractModel find(AbstractModel condition) {
+		// TODO Auto-generated method stub
+		ResultModel resultModel=new ResultModel(){};
+		findAll(condition,resultModel);
+		if(resultModel.getCount()>0){
+			return resultModel.getDataModelList().get(0);
+		}
+		return null;
+	}
 
 }

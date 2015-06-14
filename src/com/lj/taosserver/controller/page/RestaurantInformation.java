@@ -87,9 +87,10 @@ public class RestaurantInformation {
 			if(licenseModel==null){
 				licenseModel=(LicenseModel) licenseGenerator.generate();
 				restaurantModel.setLicenseModel(licenseModel);
+				simpleUpdateDao.update(restaurantModel);
 			}
 			licenseModel.setLastTime(new Date());
-			simpleUpdateDao.update(restaurantModel);
+			simpleUpdateDao.update(licenseModel);
 		}
 		
 		SimpleLicenseResult simpleLicenseResult=new SimpleLicenseResult();

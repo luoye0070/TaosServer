@@ -51,6 +51,9 @@
     <bean id="simpleDeleteDao" class="com.lj.taosserver.data.dao.impl.SimpleDao">
         <property name="factory" ref="sessionFactory"></property>
     </bean>
+    <bean id="dailyReportSearch" class="com.lj.taosserver.service.impl.DailyReportSearch">
+        <property name="factory" ref="sessionFactory"></property>
+    </bean>
     
     <bean id="licenseGenerator" class="com.lj.taosserver.service.impl.SimpleLicenseGenerator">
     </bean>

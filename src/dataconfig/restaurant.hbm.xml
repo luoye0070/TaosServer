@@ -23,6 +23,7 @@
         <property name="baseUrl" column="r_baseurl" type="java.lang.String"></property> 
         <property name="intervalTime" column="r_intervaltime" type="int"></property> 
         <property name="updateTime" column="r_updatetime" type="java.util.Date"></property> 
+        <property name="ip" column="r_ip" type="java.lang.String"></property>
         
         <one-to-one name="licenseModel" constrained="true"/>
     </class>  

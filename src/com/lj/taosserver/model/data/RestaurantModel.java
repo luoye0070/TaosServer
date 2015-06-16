@@ -21,6 +21,7 @@ public class RestaurantModel extends DataModel {
     private String baseUrl;//店铺基础url地址
     private int intervalTime;// //订单间隔时间，单位分钟,默认为60分钟
     private Date updateTime;//最后信息更新时间
+    private String ip;//店铺IP
 	
 	
 	public LicenseModel getLicenseModel() {
@@ -123,8 +124,14 @@ public class RestaurantModel extends DataModel {
 				+ enabled + ", cuisineName=" + cuisineName
 				+ ", averageConsume=" + averageConsume + ", description="
 				+ description + ", baseUrl=" + baseUrl + ", intervalTime="
-				+ intervalTime + ", updateTime=" + updateTime + ", id=" + id
+				+ intervalTime + ", updateTime=" + updateTime + ", ip=" + ip
 				+ "]";
+	}
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
 	}
 	
 }

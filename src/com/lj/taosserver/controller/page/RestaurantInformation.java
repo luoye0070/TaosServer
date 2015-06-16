@@ -49,6 +49,7 @@ public class RestaurantInformation {
 		if(restaurantModel==null){
 			return new SimpleLicenseResult();
 		}
+		restaurantModel.setUpdateTime(new Date());
 		
 		LicenseModel licenseModel=null;
 		RestaurantModel resultRestaurantModel=(RestaurantModel)simpleSearchDao.get(RestaurantModel.class, restaurantModel.getId());

@@ -96,7 +96,7 @@ Hello,I am a Model test.这是一个模型测试。
             <!-- selected -->  
             <div title="饭店管理" selected="true">  
             <ul class="easyui-tree" style="margin:10px 0px;">  
-                <li><a href="#" tabId='tabId_shopInfo' title='饭店信息' url='<%=webContext%>/index.html'>饭店信息</a></li> 
+                <li><a href="#" tabId='tabId_shopInfo' title='饭店信息' url='<%=webContext%>/jsp/restaurnt_list'>饭店信息</a></li> 
             </ul>  
             </div>
             <div title="日报管理" selected="true">  

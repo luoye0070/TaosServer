@@ -30,15 +30,18 @@
         var toolbar = [{
             text:'Edit',
             iconCls:'icon-edit',
-            handler:function(){alert('edit')}
-        },{
-            text:'Cut',
-            iconCls:'icon-cut',
-            handler:function(){alert('cut')}
-        },'-',{
-            text:'Save',
-            iconCls:'icon-save',
-            handler:function(){alert('save')}
+            handler:function(){
+            	var selectedRow=$('#dg').datagrid("getSelected");
+            	if(selectedRow==null){
+            		alert("请选择要编辑的行");
+            	}
+            	
+            	$('#dd').dialog('open');
+            	$('#dd').dialog('refresh', '<%=webContext%>/restaurant-manage/edit?rId='+selectedRow.id);
+            	
+            	alert('edit->'+selectedRow.id)
+            	
+            }
         }];
     </script>
  <style>
@@ -50,6 +53,7 @@
 	<table id="dg" class="easyui-datagrid" data-options="rownumbers:true,pagination:true,singleSelect:true,toolbar:toolbar,url:'<%=webContext+"/restaurant-manage/list"%>'">
 	    <thead>
 	        <tr>
+	        	<th data-options="field:'id'">店铺编号</th>
 	            <th data-options="field:'name'">店铺名称</th>
 	            <th data-options="field:'address'">店铺地址</th>
 	            <th data-options="field:'phone'">联系电话</th>
@@ -69,7 +73,10 @@
 	    </tbody>
 	</table>
 
-
+<div id="dd" class="easyui-dialog" title="My Dialog" style="width:400px;height:200px;"
+        data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
+    Dialog Content.
+</div>
 	<!-- <div id="pp" class="easyui-pagination" style="background:#efefef;border:1px solid #ccc;"
 	        data-options="total:2000,pageSize:10">
 	</div> -->

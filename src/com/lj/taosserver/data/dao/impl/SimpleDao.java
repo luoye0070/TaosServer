@@ -245,7 +245,7 @@ public class SimpleDao implements SaveDao, SearchDao, DeleteDao,UpdateDao {
 					}else if ("boolean".equals(fieldType)) {
 						boolean value=field.getBoolean(condition);
 						hqlStr+=" and r."+fieldName+"="+value;
-					}if ("Date".equals(fieldType)) {
+					}else if ("Date".equals(fieldType)) {
 						Date value=(Date) field.get(condition);
 						SimpleDateFormat sdtf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 						if(value!=null){

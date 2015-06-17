@@ -3,13 +3,14 @@ package com.lj.taosserver.controller.data;
 import java.util.Date;
 
 public class SimpleRestaurantResult {
+	private long id;
 	private String name;
 	private String address;
 	private String phone;
 	private boolean enabled;//开启关闭状态true开启，false关闭
     private String cuisineName;//菜系 
     private boolean licenseEnable;//是否有效
-    private Date licenseLastTime;//最后访问时间
+    private String licenseLastTime;//最后访问时间
 	public String getName() {
 		return name;
 	}
@@ -46,11 +47,17 @@ public class SimpleRestaurantResult {
 	public void setLicenseEnable(boolean licenseEnable) {
 		this.licenseEnable = licenseEnable;
 	}
-	public Date getLicenseLastTime() {
+	public String getLicenseLastTime() {
 		return licenseLastTime;
 	}
-	public void setLicenseLastTime(Date licenseLastTime) {
+	public void setLicenseLastTime(String licenseLastTime) {
 		this.licenseLastTime = licenseLastTime;
+	}
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
 	}
     
     

@@ -28,7 +28,7 @@
  
  	<script type="text/javascript">
         var toolbar = [{
-            text:'Edit',
+            text:'编辑',
             iconCls:'icon-edit',
             handler:function(){
             	var selectedRow=$('#dg').datagrid("getSelected");
@@ -39,7 +39,7 @@
             	$('#dd').dialog('open');
             	$('#dd').dialog('refresh', '<%=webContext%>/restaurant-manage/edit?rId='+selectedRow.id);
             	
-            	alert('edit->'+selectedRow.id)
+            	//alert('edit->'+selectedRow.id)
             	
             }
         }];
@@ -73,7 +73,7 @@
 	    </tbody>
 	</table>
 
-<div id="dd" class="easyui-dialog" title="My Dialog" style="width:400px;height:200px;"
+<div id="dd" class="easyui-dialog" title="编辑饭店信息" style="width:435px;height:605px;"
         data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
     Dialog Content.
 </div>

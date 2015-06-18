@@ -9,7 +9,12 @@ import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -65,9 +70,13 @@ public class RestaurantManage {
 					simpleResult.setAddress(restaurantModel.getAddress());
 					simpleResult.setCuisineName(restaurantModel.getCuisineName());
 					simpleResult.setEnabled(restaurantModel.isEnabled());
-					simpleResult.setLicenseEnable(restaurantModel.getLicenseModel().isEnable());
+					if(restaurantModel.getLicenseModel()!=null)
+						simpleResult.setLicenseEnable(restaurantModel.getLicenseModel().isEnable());
 					SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-					String lastTimeStr=sdf.format(restaurantModel.getLicenseModel().getLastTime());
+					String lastTimeStr="";
+					if(restaurantModel.getLicenseModel()!=null&&restaurantModel.getLicenseModel().getLastTime()!=null){
+						lastTimeStr=sdf.format(restaurantModel.getLicenseModel().getLastTime());
+					}
 					simpleResult.setLicenseLastTime(lastTimeStr);
 					simpleResult.setName(restaurantModel.getName());
 					simpleResult.setPhone(restaurantModel.getPhone());
@@ -84,12 +93,31 @@ public class RestaurantManage {
 	}
 	
 	@RequestMapping("/edit")
-	public String edit(HttpServletRequest request,int rId){
+	public String edit(HttpServletRequest request,long rId,Model model){
 		
 
 		LOG.info("params->"+request.getParameterNames().toString());
 		LOG.info("rId->"+rId+"-"+rId);
 		
+		//根据ID查询出相应restaurant
+		RestaurantModel restaurantModel = (RestaurantModel) simpleSearchDao.get(RestaurantModel.class, rId);
+		
+		model.addAttribute("restaurantModel", restaurantModel);
+		
 		return "restaurant_edit";
+	}
+	
+
+	@InitBinder    
+	public void initBinder(WebDataBinder binder) {    
+	    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");    
+	    dateFormat.setLenient(false);    
+	    binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));    
+	}
+	@RequestMapping("/save")
+	@ResponseBody
+	public void save(HttpServletRequest request,RestaurantModel restaurantModel, Errors errors){
+		
+		LOG.info("restaurantModel->"+restaurantModel);
 	}
 }

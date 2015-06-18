@@ -15,7 +15,7 @@
  
  <script type="text/javascript">
  	$(function(){
- 		$('#dd').dialog({
+ 		/* $('#dd').dialog({
  			buttons:[{
 				text:'保存',
 				handler:function(){
@@ -27,7 +27,7 @@
 					$('#dd').dialog('close');
 				}
 			}]
- 		});
+ 		}); */
  	});
  	
  	$(function(){
@@ -39,7 +39,8 @@
  </script>
  
  	<script type="text/javascript">
-        var toolbar = [{
+ 		var toolbar = [];
+        <%-- var toolbar = [{
             text:'编辑',
             iconCls:'icon-edit',
             handler:function(){
@@ -55,7 +56,7 @@
             	//alert('edit->'+selectedRow.id)
             	
             }
-        }];
+        }]; --%>
     </script>
  <style>
  </style>
@@ -63,17 +64,15 @@
 </head>
 
 <body>  
-	<table id="dg" class="easyui-datagrid" data-options="rownumbers:true,pagination:true,singleSelect:true,toolbar:toolbar,url:'<%=webContext+"/restaurant-manage/list"%>'">
+	<table id="dg" class="easyui-datagrid" data-options="rownumbers:true,pagination:true,singleSelect:true,toolbar:toolbar,url:'<%=webContext+"/dailyreport-manage/list"%>'">
 	    <thead>
 	        <tr>
-	        	<th data-options="field:'id'">店铺编号</th>
-	            <th data-options="field:'name'">店铺名称</th>
-	            <th data-options="field:'address'">店铺地址</th>
-	            <th data-options="field:'phone'">联系电话</th>
-	            <th data-options="field:'enabled'">店铺是否有效</th>
-	            <th data-options="field:'cuisineName'">所属菜系</th>
-	            <th data-options="field:'licenseLastTime'">许可证最后获取时间</th>
-	            <th data-options="field:'licenseEnable'">许可证是否有效</th>
+	        	<th data-options="field:'id'">编号</th>
+	            <th data-options="field:'restaurantName'">店铺名称</th>
+	            <th data-options="field:'date'">日期</th>
+	            <th data-options="field:'totalCount'">总订单数</th>
+	            <th data-options="field:'availableCount'">有效订单数</th>
+	            <th data-options="field:'completeCount'">最终完成订单数</th>
 	        </tr>
 	    </thead>
 	    <tbody>
@@ -86,10 +85,10 @@
 	    </tbody>
 	</table>
 
-<div id="dd" class="easyui-dialog" title="编辑饭店信息" style="width:455px;height:405px;"
+<!-- <div id="dd" class="easyui-dialog" title="编辑饭店信息" style="width:455px;height:405px;"
         data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
     Dialog Content.
-</div>
+</div> -->
 	<!-- <div id="pp" class="easyui-pagination" style="background:#efefef;border:1px solid #ccc;"
 	        data-options="total:2000,pageSize:10">
 	</div> -->

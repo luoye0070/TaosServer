@@ -5,19 +5,19 @@ import java.util.Date;
 import com.lj.taosserver.model.DataModel;
 
 public class LicenseModel extends DataModel {
-	protected RestaurantModel restaurantModel;
+	//protected RestaurantModel restaurantModel;//双向关联导致死循环
 	protected String licenseSerial;//标示的序列化字符串
 	protected boolean enable;//是否有效
 	protected int expire;//有效期时间，单位天
 	protected Date createTime;//创建时间
 	protected Date lastTime;//最后访问时间
 	
-	public RestaurantModel getRestaurantModel() {
-		return restaurantModel;
-	}
-	public void setRestaurantModel(RestaurantModel restaurantModel) {
-		this.restaurantModel = restaurantModel;
-	}
+//	public RestaurantModel getRestaurantModel() {
+//		return restaurantModel;
+//	}
+//	public void setRestaurantModel(RestaurantModel restaurantModel) {
+//		this.restaurantModel = restaurantModel;
+//	}
 	public String getLicenseSerial() {
 		return licenseSerial;
 	}

@@ -13,6 +13,6 @@
         <property name="createTime" column="l_create_time" type="java.util.Date"></property>  
         <property name="lastTime" column="l_last_time" type="java.util.Date"></property>
         
-        <one-to-one name="restaurantModel"/>  
+        <!-- <one-to-one name="restaurantModel"/> --><!-- 双向关联导致死循环 -->  
     </class>  
 </hibernate-mapping>  

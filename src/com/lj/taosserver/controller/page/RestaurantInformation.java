@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -44,11 +45,13 @@ public class RestaurantInformation {
 	
 	@RequestMapping("/update")
 	@ResponseBody
-	public DataModel updateRestaurantInfo(RestaurantModel restaurantModel, Errors errors){
+	public DataModel updateRestaurantInfo(HttpServletRequest request,RestaurantModel restaurantModel, Errors errors){
 		
 		if(restaurantModel==null){
 			return new SimpleLicenseResult();
 		}
+		String ip=getClientIp(request);
+		restaurantModel.setIp(ip);
 		restaurantModel.setUpdateTime(new Date());
 		
 		LicenseModel licenseModel=null;
@@ -105,4 +108,34 @@ public class RestaurantInformation {
 		
 		return simpleLicenseResult;
 	}
+	
+	/**
+     * 获取客户端ip
+     * <p>获取客户端ip</p>
+     * @author 刘兆国
+     * @param
+     * @return
+     * @Date: 2013-11-28
+     * @Time: 上午11: 43
+     */
+    public String getClientIp(HttpServletRequest request){
+        String clientIp="";
+        /*****获取外网ip********/
+        if (request.getHeader("X-Forwarded-For") != null)
+            clientIp = request.getHeader("X-Forwarded-For");
+        else if(request.getHeader("X-Real-IP") != null)
+            clientIp = request.getHeader("X-Real-IP");
+        else
+            clientIp = "0.0.0.0";
+
+        /********获取内网ip**********/
+        String vcip= request.getRemoteAddr();
+        if(vcip==null||vcip==""){
+            clientIp=clientIp+"."+"0.0.0.0";
+        }else{
+            clientIp=clientIp+"."+vcip;
+        }
+        //println "clientIp: "+clientIp
+        return clientIp;
+    }
 }

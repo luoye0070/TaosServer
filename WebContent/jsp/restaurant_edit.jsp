@@ -32,19 +32,27 @@
  		        // return false to prevent submit;
  		    },
  		    success:function(data){
- 		        alert(data)
+ 		        //alert(data)
+ 		        if(data=="ok"){
+ 		        	//alert("保存成功");
+ 		        	$('#dd').dialog('close');
+ 		        	$('#dg').datagrid("reload");
+ 		        }
+ 		        else{
+ 		        	alert("保存失败："+data);
+ 		        }
  		    }
  		});
  		// submit the form
  		//$('#ff').submit();
  	});
- 	function submitForm(){
+ 	/* function submitForm(){
  		//alert("submit");
  		$('#ff').submit();
  	}
  	function cancelForm(){
  		$('#dd').dialog('close');
- 	}
+ 	} */
  </script>
 <style type="text/css">
 	td{
@@ -181,8 +189,8 @@
 	protected Date lastTime;//最后访问时间
     -->
     <tr>
-    	<td><input type="button" value="取消" onclick="cancelForm()"/></td>
-    	<td><input type="button" value="保存" onclick="submitForm()"/></td>
+    	<!-- <td><input type="button" value="取消" onclick="cancelForm()"/></td>
+    	<td><input type="button" value="保存" onclick="submitForm()"/></td> -->
     </tr>
     </table>
 </form:form>

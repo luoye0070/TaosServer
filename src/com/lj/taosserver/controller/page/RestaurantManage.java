@@ -116,8 +116,12 @@ public class RestaurantManage {
 	}
 	@RequestMapping("/save")
 	@ResponseBody
-	public void save(HttpServletRequest request,RestaurantModel restaurantModel, Errors errors){
+	public String save(HttpServletRequest request,RestaurantModel restaurantModel, Errors errors){
 		
 		LOG.info("restaurantModel->"+restaurantModel);
+		simpleUpdateDao.update(restaurantModel.getLicenseModel());
+		simpleUpdateDao.update(restaurantModel);
+		
+		return "ok";
 	}
 }

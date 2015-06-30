@@ -3,6 +3,7 @@ package com.lj.taosserver.controller.page;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -25,6 +27,7 @@ import com.lj.taosserver.data.dao.PageSearchDao;
 import com.lj.taosserver.data.dao.SaveDao;
 import com.lj.taosserver.data.dao.SearchDao;
 import com.lj.taosserver.data.dao.UpdateDao;
+import com.lj.taosserver.model.ConditionModel;
 import com.lj.taosserver.model.DataModel;
 import com.lj.taosserver.model.ResultModel;
 import com.lj.taosserver.model.data.DailyReportModel;
@@ -42,7 +45,7 @@ public class DailyReportManage {
 	@Resource
 	SearchDao dailyReportSearch;
 	
-	@Resource(name="simplePageSearchDao")
+	@Resource(name="dailyReportPageSearch")
 	PageSearchDao simplePageSearchDao;
 	
 	
@@ -53,11 +56,26 @@ public class DailyReportManage {
 	public SimpleListResult getList(HttpServletRequest request,int page,int rows){
 		
 		LOG.info("params->"+request.getParameterNames().toString());
+		LOG.info("params->beginDate:"+request.getParameter("beginDate"));
+		LOG.info("params->endDate:"+request.getParameter("endDate"));
+		LOG.info("params->restaurant:"+request.getParameter("restaurant"));
 		LOG.info("params->"+page+"-"+rows);
 		
 		ResultModel resultModel=new ResultModel(){};
+		ConditionModel conditionModel=new ConditionModel(){};
+		HashMap condition=new HashMap();
+		conditionModel.setCondition(condition);
+		if(!StringUtils.isEmpty(request.getParameter("beginDate"))){
+			condition.put("beginDate", request.getParameter("beginDate"));
+		}
+		if(!StringUtils.isEmpty(request.getParameter("endDate"))){
+			condition.put("endDate", request.getParameter("endDate"));
+		}
+		if(!StringUtils.isEmpty(request.getParameter("restaurant"))){
+			condition.put("restaurant", request.getParameter("restaurant"));
+		}
 		
-		int count=simplePageSearchDao.findAll(new DailyReportModel(), resultModel, page, rows);
+		int count=simplePageSearchDao.findAll(conditionModel, resultModel, page, rows);
 		
 		List<SimpleDailyReportResult> srrList=new ArrayList<SimpleDailyReportResult>();
 		

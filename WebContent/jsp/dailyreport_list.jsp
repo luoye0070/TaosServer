@@ -12,6 +12,7 @@
  <script type="text/javascript"  src="<%=webContext %>/js/easyui-1.4.2/jquery.min.js"></script> 
  <script type="text/javascript"  src="<%=webContext %>/js/easyui-1.4.2/jquery.easyui.min.js"></script>  
  <script type="text/javascript"  src="<%=webContext %>/js/easyui-1.4.2/locale/easyui-lang-zh_CN.js"></script>
+ <script type="text/javascript"  src="<%=webContext %>/js/serializeJson.js"></script>
  
  <script type="text/javascript">
  	$(function(){
@@ -58,13 +59,24 @@
             }
         }]; --%>
     </script>
+    <script type="text/javascript">
+    	function searchReport(){
+    		//alert("searcj");
+    		/* $('#dg').datagrid('load',{
+    			beginDate: $("#beginDate").val(),
+    			endDate: $("#endDate").val(),
+    			restaurant:$("#restaurant").val()
+    		}); */
+    		$("#dg").datagrid('load',$("#searchForm").serializeJson());
+    	}
+    </script>
  <style>
  </style>
 <title>测试</title>
 </head>
 
 <body>  
-	<table id="dg" class="easyui-datagrid" data-options="rownumbers:true,pagination:true,singleSelect:true,toolbar:toolbar,url:'<%=webContext+"/dailyreport-manage/list"%>'">
+	<table id="dg" class="easyui-datagrid" data-options="rownumbers:true,pagination:true,singleSelect:true,toolbar:'#tb',url:'<%=webContext+"/dailyreport-manage/list"%>'">
 	    <thead>
 	        <tr>
 	        	<th data-options="field:'id'">编号</th>
@@ -84,7 +96,22 @@
 	        </tr> -->
 	    </tbody>
 	</table>
-
+	<div id="tb" style="padding:2px 5px;">
+		<form id="searchForm">
+        	日期起: <input class="easyui-datebox" style="width:110px" name="beginDate"/>&nbsp;&nbsp; 
+    		日期止: <input class="easyui-datebox" style="width:110px" name="endDate"/>&nbsp;&nbsp;   
+        	饭店: 
+	        <select class="easyui-combobox" panelHeight="auto" style="width:100px" name="restaurant">
+	            <option value="1">Java</option>
+	            <option value="2">C</option>
+	            <option value="3">Basic</option>
+	            <option value="4">Perl</option>
+	            <option value="5">Python</option>
+	        </select>&nbsp;&nbsp;  
+	        <a href="#" class="easyui-linkbutton" onclick="searchReport()" iconCls="icon-search">查找</a>
+        </form>
+    </div>
+    
 <!-- <div id="dd" class="easyui-dialog" title="编辑饭店信息" style="width:455px;height:405px;"
         data-options="iconCls:'icon-save',resizable:true,modal:true,closed:true">
     Dialog Content.

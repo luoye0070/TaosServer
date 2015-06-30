@@ -57,6 +57,9 @@
     <bean id="dailyReportSearch" class="com.lj.taosserver.service.impl.DailyReportSearch">
         <property name="factory" ref="sessionFactory"></property>
     </bean>
+    <bean id="dailyReportPageSearch" class="com.lj.taosserver.service.impl.DailyReportPageSearch">
+        <property name="factory" ref="sessionFactory"></property>
+    </bean>
     
     <bean id="licenseGenerator" class="com.lj.taosserver.service.impl.SimpleLicenseGenerator">
     </bean>

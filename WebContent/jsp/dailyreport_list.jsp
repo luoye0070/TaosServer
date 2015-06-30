@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -102,11 +103,12 @@
     		日期止: <input class="easyui-datebox" style="width:110px" name="endDate"/>&nbsp;&nbsp;   
         	饭店: 
 	        <select class="easyui-combobox" panelHeight="auto" style="width:100px" name="restaurant">
-	            <option value="1">Java</option>
-	            <option value="2">C</option>
-	            <option value="3">Basic</option>
-	            <option value="4">Perl</option>
-	            <option value="5">Python</option>
+	        	<option value="">全部</option>
+	        	<c:if test="${dataList!=null}">
+	        		<c:forEach items="${dataList}" var="data" varStatus="i">
+	        			<option value="${data.id}">${data.name}</option>
+	        		</c:forEach>
+	        	</c:if>
 	        </select>&nbsp;&nbsp;  
 	        <a href="#" class="easyui-linkbutton" onclick="searchReport()" iconCls="icon-search">查找</a>
         </form>

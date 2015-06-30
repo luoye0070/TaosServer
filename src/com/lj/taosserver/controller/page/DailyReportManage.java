@@ -111,4 +111,13 @@ public class DailyReportManage {
 		
 		return slr;
 	}
+	@RequestMapping("/listview")
+	public String listView(HttpServletRequest request,Model model){
+		
+		ResultModel resultModel = new ResultModel(){};
+		simpleSearchDao.findAll(new RestaurantModel(), resultModel);
+		model.addAttribute("dataList",resultModel.getDataModelList());
+		
+		return "dailyreport_list";
+	}
 }

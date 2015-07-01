@@ -101,7 +101,7 @@ Hello,I am a Model test.这是一个模型测试。
             </div>
             <div title="日报管理" selected="true">  
             <ul class="easyui-tree" style="margin:10px 0px;">  
-                <li><a href="#" tabId='tabId_dailyReports' title='日报管理' url='<%=webContext%>/jsp/dailyreport_list.jsp'>日报管理</a></li> 
+                <li><a href="#" tabId='tabId_dailyReports' title='日报管理' url='<%=webContext%>/dailyreport-manage/listview'>日报管理</a></li> 
             </ul>  
             </div>   
         </div>  

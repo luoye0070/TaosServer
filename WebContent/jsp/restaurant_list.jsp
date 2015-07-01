@@ -6,6 +6,7 @@
 <html>
 <head>
  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+ <meta http-equiv="X-Frame-Options" content="SAMEORIGIN"> 
  <%  String webContext = request.getContextPath();  %>  
  <link rel="stylesheet" type="text/css"  href="<%=webContext %>/js/easyui-1.4.2/themes/default/easyui.css"> 
  <link rel="stylesheet" type="text/css"  href="<%=webContext %>/js/easyui-1.4.2/themes/icon.css"> 

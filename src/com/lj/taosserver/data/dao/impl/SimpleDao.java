@@ -278,17 +278,17 @@ public class SimpleDao implements SaveDao, SearchDao, DeleteDao,UpdateDao {
 			Session session = null;
 			try{
 				session=factory.openSession();
-				session.beginTransaction();
+				//session.beginTransaction();
 				List<DataModel> resultList=session.createQuery(hqlStr).list();
-				session.getTransaction().commit();
 				int count=resultList.size();
 				ResultModel resultModel=(ResultModel)result;
 				resultModel.setCount(count);
 				resultModel.setDataModelList(resultList);
 				//result=resultModel;
+				//session.getTransaction().commit();
 				return count;
 			}catch(Exception ex){
-				session.getTransaction().rollback();
+				//session.getTransaction().rollback();
 				ex.printStackTrace();
 			}finally{
 				//System.out.println("test finally");

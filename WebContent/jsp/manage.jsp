@@ -87,7 +87,7 @@ Hello,I am a Model test.这是一个模型测试。
         </span>
         <span style="padding-left:10px; font-size: 16px; ">
         <!-- <img src="images/blocks.gif" width="20" height="20" align="absmiddle" /> --> 
-        XX管理系统
+        	饭店信息管理系统
 		</span>
     </div>
     <!-- 正左边panel -->  

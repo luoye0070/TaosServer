@@ -3,6 +3,7 @@ package com.lj.taosserver.service.impl;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Logger;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,12 +11,17 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
+import com.lj.taosserver.controller.page.Manage;
+
 public class CustomUserDetailsService implements UserDetailsService {
 
+	protected static final Logger LOG = Logger.getLogger(CustomUserDetailsService.class.getSimpleName());
 	@Override
 	public UserDetails loadUserByUsername(String username)
 			throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
+		LOG.info("j_username->"+username);
+		
 		return null;
 	}
 

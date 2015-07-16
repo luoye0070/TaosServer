@@ -64,7 +64,7 @@
 </head>
 
 <body>  
-	<table id="dg" class="easyui-datagrid" data-options="rownumbers:true,pagination:true,singleSelect:true,toolbar:toolbar,url:'<%=webContext+"/restaurant-manage/list"%>'">
+	<table id="dg" class="easyui-datagrid" data-options="rownumbers:true,method:'get',pagination:true,singleSelect:true,toolbar:toolbar,url:'<%=webContext+"/restaurant-manage/list"%>'">
 	    <thead>
 	        <tr>
 	        	<th data-options="field:'id'">店铺编号</th>

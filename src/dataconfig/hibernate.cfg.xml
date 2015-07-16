@@ -31,15 +31,19 @@
     <session-factory>
 
         <!-- Database connection settings -->
-        <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
+        <!-- <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
         <property name="connection.url">jdbc:mysql://localhost/taosserver?useConfigs=maxPerformance&amp;characterEncoding=utf8</property>
         <property name="connection.username">root</property>
-        <property name="connection.password">lzg123</property> 
+        <property name="connection.password">lzg123</property>  -->
         <!-- <property name="connection.username">root</property>
         <property name="connection.password">daveliu</property>-->
 
         <!-- JDBC connection pool (use the built-in) -->
-        <property name="connection.pool_size">1</property>
+        <!-- <property name="connection.pool_size">1</property> -->
+        
+        <property name="hibernate.connection.provider_class">org.hibernate.proxool.internal.ProxoolConnectionProvider</property>
+		<property name="hibernate.proxool.xml">dataconfig/proxool.xml</property>
+		<property name="hibernate.proxool.pool_alias">mysql</property>
 
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>

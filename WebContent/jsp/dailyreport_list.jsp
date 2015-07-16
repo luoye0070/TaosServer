@@ -77,7 +77,7 @@
 </head>
 
 <body>  
-	<table id="dg" class="easyui-datagrid" data-options="rownumbers:true,pagination:true,singleSelect:true,toolbar:'#tb',url:'<%=webContext+"/dailyreport-manage/list"%>'">
+	<table id="dg" class="easyui-datagrid" data-options="rownumbers:true,method:'get',pagination:true,singleSelect:true,toolbar:'#tb',url:'<%=webContext+"/dailyreport-manage/list"%>'">
 	    <thead>
 	        <tr>
 	        	<th data-options="field:'id'">编号</th>

@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -81,9 +83,16 @@ Hello,I am a Model test.这是一个模型测试。
     <div region="north" split="true" border="false" style="overflow: hidden; height: 30px;
         background: url(images/layout-browser-hd-bg.gif) #7f99be repeat-x center 50%;
         line-height: 20px;color: #fff; font-family: Verdana, 微软雅黑,黑体">
-        <span style="float:right; padding-right:20px;" class="head">欢迎 疯狂秀才 
-        	<a href="#" id="editpass">修改密码</a> 
-        	<a href="#" id="loginOut">安全退出</a>
+        <div style="float:right;">
+			<c:url var="logoutUrl" value="/logout"/>
+			<form:form action="${logoutUrl}" method="post">
+				<input type="submit" class="easyui-linkbutton" value="安全退出"/>
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			</form:form>
+		</div>
+        <span style="float:right; padding-right:20px;" class="head">欢迎 <sec:authentication property="principal.username" />
+        	<!-- <a href="#" id="editpass">修改密码</a>  -->
+        	<%-- <a href="<%=webContext%>/logout" id="loginOut">安全退出</a> --%>
         </span>
         <span style="padding-left:10px; font-size: 16px; ">
         <!-- <img src="images/blocks.gif" width="20" height="20" align="absmiddle" /> --> 

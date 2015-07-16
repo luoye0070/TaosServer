@@ -7,6 +7,7 @@ import java.util.logging.Logger;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -21,8 +22,29 @@ public class CustomUserDetailsService implements UserDetailsService {
 			throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
 		LOG.info("j_username->"+username);
-		
-		return null;
+		UserDetails user = null;  
+		  
+        try {  
+  
+            // 搜索数据库以匹配用户登录名.  
+            // 我们可以通过dao使用JDBC来访问数据库  
+            //DbUser dbUser = userDAO.getDatabase(username);  
+  
+            // Populate the Spring User object with details from the dbUser  
+            // Here we just pass the username, password, and access level  
+            // getAuthorities() will translate the access level to the correct  
+            // role type  
+  
+            user = new User(username, "1f2a2216f7e77fa761e18eecd90b68ac"  
+                    .toLowerCase(), true, true, true, true,  
+                    getAuthorities(1));  
+  
+        } catch (Exception e) {  
+        	LOG.warning("Error in retrieving user");  
+            throw new UsernameNotFoundException("Error in retrieving user");  
+        }  
+  
+        return user;  
 	}
 
 	/** 

@@ -14,7 +14,7 @@ public class Manage {
 	protected static final Logger LOG = Logger.getLogger(Manage.class.getSimpleName());
 	
 	@RequestMapping("/index")
-	public String edit(HttpServletRequest request,Model model){
+	public String index(HttpServletRequest request,Model model){
 		
 
 		LOG.info("params->"+request.getParameterNames().toString());

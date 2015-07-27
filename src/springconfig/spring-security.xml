@@ -23,9 +23,9 @@
           
         <security:intercept-url pattern="/auth/login" access="permitAll"/>  
         
-        <security:intercept-url pattern="/manage/*" access="hasRole('ROLE_ADMIN')"/> 
-        <security:intercept-url pattern="/dailyreport-manage/*" access="hasRole('ROLE_ADMIN')"/>
-        <security:intercept-url pattern="/restaurant-manage/*" access="hasRole('ROLE_ADMIN')"/> 
+        <security:intercept-url pattern="/manage/*" access="hasAnyRole('ROLE_MANAGE','ROLE_ADMIN')"/> 
+        <security:intercept-url pattern="/dailyreport-manage/*" access="hasAnyRole('ROLE_MANAGE','ROLE_ADMIN')"/>
+        <security:intercept-url pattern="/restaurant-manage/*" access="hasAnyRole('ROLE_MANAGE','ROLE_ADMIN')"/> 
           
        <security:form-login  
                 login-page="/auth/login"   
@@ -58,6 +58,8 @@
         通过 customUserDetailsService,Spring会自动的用户的访问级别.  
         也可以理解成:以后我们和数据库操作就是通过customUserDetailsService来进行关联.  
      -->  
-    <bean id="customUserDetailsService" class="com.lj.taosserver.service.impl.CustomUserDetailsService"/>  
+    <bean id="customUserDetailsService" class="com.lj.taosserver.service.impl.CustomUserDetailsService">
+    	<property name="simpleSearchDao" ref="simpleSearchDao"></property>
+    </bean>  
             
 </beans> 

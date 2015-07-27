@@ -4,7 +4,10 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.security.authentication.encoding.Md5PasswordEncoder;
+import org.springframework.security.authentication.encoding.PasswordEncoder;
 
+import com.lj.taosserver.constant.AuthorityConstant;
 import com.lj.taosserver.data.dao.SaveDao;
 import com.lj.taosserver.data.dao.SearchDao;
 import com.lj.taosserver.data.dao.impl.SimpleDao;
@@ -13,6 +16,7 @@ import com.lj.taosserver.model.ResultModel;
 import com.lj.taosserver.model.data.DailyReportModel;
 import com.lj.taosserver.model.data.LicenseModel;
 import com.lj.taosserver.model.data.RestaurantModel;
+import com.lj.taosserver.model.data.UserModel;
 import com.lj.taosserver.service.LicenseGenerator;
 import com.lj.taosserver.service.impl.SimpleLicenseGenerator;
 
@@ -53,28 +57,38 @@ public class Test {
 //		System.out.println("ll.r::"+ll.getRestaurantModel());
 		
 		
-		LicenseGenerator licenseGenerator=new SimpleLicenseGenerator();
-		LicenseModel licenseModelG=(LicenseModel) licenseGenerator.generate();
-		System.out.println("licenseModelG::"+licenseModelG);
-		
-		DailyReportModel dataModel=new DailyReportModel();
-		dataModel.setId(0);
-		dataModel.setAvailableCount(10);
-		dataModel.setTotalCount(100);
-		dataModel.setDate(new Date());
-		
-		SaveDao saveDao=new SimpleDao("dataconfig/hibernate.cfg.xml");
-		saveDao.save(dataModel);
-		
-		System.out.println("DailyReportModel->"+dataModel);
-		
-		
+//		LicenseGenerator licenseGenerator=new SimpleLicenseGenerator();
+//		LicenseModel licenseModelG=(LicenseModel) licenseGenerator.generate();
+//		System.out.println("licenseModelG::"+licenseModelG);
+//		
+//		DailyReportModel dataModel=new DailyReportModel();
+//		dataModel.setId(0);
+//		dataModel.setAvailableCount(10);
+//		dataModel.setTotalCount(100);
+//		dataModel.setDate(new Date());
+//		
+//		SaveDao saveDao=new SimpleDao("dataconfig/hibernate.cfg.xml");
+//		saveDao.save(dataModel);
+//		
+//		System.out.println("DailyReportModel->"+dataModel);
+//		
+//		
 		ClassPathXmlApplicationContext appContext = 
                 new ClassPathXmlApplicationContext(new String[] {"springconfig/applicationContext.xml"});
-		SearchDao searchDao=(SearchDao) appContext.getBean("simpleDao");
+//		SearchDao searchDao=(SearchDao) appContext.getBean("simpleDao");
+//		
+//		DailyReportModel dataModel1=(DailyReportModel) searchDao.get(DailyReportModel.class, 1);
+//		System.out.println("DailyReportModel1->"+dataModel1);
 		
-		DailyReportModel dataModel1=(DailyReportModel) searchDao.get(DailyReportModel.class, 1);
-		System.out.println("DailyReportModel1->"+dataModel1);
+		PasswordEncoder passwordEncoder=new Md5PasswordEncoder();
+		SimpleDao simpleDao=(SimpleDao) appContext.getBean("simpleDao");
+		//UserModel userModel=new UserModel();
+		//userModel.setUserName("luoye");
+		UserModel userModel=(UserModel) simpleDao.get(UserModel.class, 1);
+		userModel.setPassWord(passwordEncoder.encodePassword("111111","luoye"));
+		userModel.setAuths(AuthorityConstant.ROLE_ADMIN.code+","+AuthorityConstant.ROLE_MANAGE.code);
+		
+		simpleDao.update(userModel);
 		
 		
 	}

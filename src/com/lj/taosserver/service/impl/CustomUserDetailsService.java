@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
+import javax.annotation.Resource;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -13,8 +15,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import com.lj.taosserver.controller.page.Manage;
+import com.lj.taosserver.data.dao.SearchDao;
+import com.lj.taosserver.model.data.UserModel;
 
 public class CustomUserDetailsService implements UserDetailsService {
+
+//	@Resource(name="simpleSearchDao")
+	SearchDao simpleSearchDao;
+	
+	public SearchDao getSimpleSearchDao() {
+		return simpleSearchDao;
+	}
+
+	public void setSimpleSearchDao(SearchDao simpleSearchDao) {
+		this.simpleSearchDao = simpleSearchDao;
+	}
 
 	protected static final Logger LOG = Logger.getLogger(CustomUserDetailsService.class.getSimpleName());
 	@Override
@@ -25,19 +40,16 @@ public class CustomUserDetailsService implements UserDetailsService {
 		UserDetails user = null;  
 		  
         try {  
-  
-            // 搜索数据库以匹配用户登录名.  
-            // 我们可以通过dao使用JDBC来访问数据库  
-            //DbUser dbUser = userDAO.getDatabase(username);  
-  
-            // Populate the Spring User object with details from the dbUser  
-            // Here we just pass the username, password, and access level  
-            // getAuthorities() will translate the access level to the correct  
-            // role type  
-  
-            user = new User(username, "1f2a2216f7e77fa761e18eecd90b68ac"  
-                    .toLowerCase(), true, true, true, true,  
-                    getAuthorities(1));  
+        	// 搜索数据库以匹配用户登录名.
+        	UserModel condition=new UserModel();
+        	condition.setUserName(username);
+        	UserModel userModel=(UserModel) simpleSearchDao.find(condition);
+        	LOG.info("userModel->"+userModel.toString());
+        	if(userModel!=null){
+        		user = new User(username, userModel.getPassWord()  
+                        .toLowerCase(), true, true, true, true,  
+                        getAuthorities(userModel.getAuths()));  
+        	} 
   
         } catch (Exception e) {  
         	LOG.warning("Error in retrieving user");  
@@ -53,18 +65,17 @@ public class CustomUserDetailsService implements UserDetailsService {
      * @param access 
      * @return 
      */  
-    public Collection<GrantedAuthority> getAuthorities(Integer access) {  
-  
-        List<GrantedAuthority> authList = new ArrayList<GrantedAuthority>(2);  
-  
-        // 所有的用户默认拥有ROLE_USER权限  
-        authList.add(new SimpleGrantedAuthority("ROLE_USER"));  
-  
-        // 如果参数access为1.则拥有ROLE_ADMIN权限  
-        if (access.compareTo(1) == 0) {  
-            authList.add(new SimpleGrantedAuthority("ROLE_ADMIN"));  
-        }  
-  
+    public Collection<GrantedAuthority> getAuthorities(String auths) {  
+    	List<GrantedAuthority> authList = new ArrayList<GrantedAuthority>(2); 
+    	if(auths!=null){
+	    	String [] authsStrs=auths.split(",");       
+	    	if(authsStrs.length>0){
+	    		for(String auth:authsStrs){
+	    			authList.add(new SimpleGrantedAuthority(auth)); 
+	    			LOG.info("auth->"+auth);
+	    		}
+	    	}
+    	}
         return authList;  
     }  
 }

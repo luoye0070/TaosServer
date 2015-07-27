@@ -43,6 +43,7 @@ public class AuthenticationManage {
 		LOG.info("password->"+passwordEncoder.encodePassword("111111", "111111"));
 		
 		LOG.info("params-error->"+request.getParameter("error"));
+		
 		model.addAttribute("error", request.getParameter("error"));
 		return "login";
 	}

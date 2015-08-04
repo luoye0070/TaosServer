@@ -64,5 +64,9 @@
     <bean id="licenseGenerator" class="com.lj.taosserver.service.impl.SimpleLicenseGenerator">
     </bean>
     
-    
+    <bean class="com.lj.taosserver.listener.SpringInitListener">
+    	<property name="simpleSearchDao" ref="simpleSearchDao"></property>
+    	<property name="simpleSaveDao" ref="simpleSaveDao"></property>
+    	<property name="passwordEncoder" ref="passwordEncoder"></property>
+    </bean>
 </beans>

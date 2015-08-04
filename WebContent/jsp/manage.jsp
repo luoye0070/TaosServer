@@ -113,11 +113,13 @@ Hello,I am a Model test.这是一个模型测试。
                 <li><a href="#" tabId='tabId_dailyReports' title='日报管理' url='<%=webContext%>/dailyreport-manage/listview'>日报管理</a></li> 
             </ul>  
             </div>
+            <sec:authorize access="hasRole('ROLE_ADMIN')">
             <div title="用户管理" selected="true">  
             <ul class="easyui-tree" style="margin:10px 0px;">  
                 <li><a href="#" tabId='tabId_user' title='用户管理' url='<%=webContext%>/auth/userlistview'>用户管理</a></li> 
             </ul>  
-            </div>    
+            </div> 
+            </sec:authorize>   
         </div>  
     </div>  
     <!-- 正中间panel -->  

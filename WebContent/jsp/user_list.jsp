@@ -82,6 +82,10 @@
 	            	    //alert("Data: " + data + "\nStatus: " + status);
 	            	    if(data=='ok'){
 	            	    	$('#dg').datagrid("reload");
+	            	    }else if(data=='notLogin'){
+	            	    	alert("请先登录");
+	            	    }else if(data=='canNotDeleteCurrent'){
+	            	    	alert("不能删除自己哦");
 	            	    }
 	            	}); 
             	}

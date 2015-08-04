@@ -208,8 +208,24 @@ public class AuthenticationManage {
 	
 	@RequestMapping("/userdelete")
 	@ResponseBody
-	public String delete(HttpServletRequest request,long uId){		
-		simpleDeleteDao.delete(UserModel.class, uId);
-		return "ok";
+	public String delete(HttpServletRequest request,long uId){	
+		UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext()
+			    .getAuthentication()
+			    .getPrincipal();
+		if(userDetails!=null){
+			String userName=userDetails.getUsername();
+			if(userName==null){
+				return "notLogin";
+			}
+			UserModel userModel=new UserModel();
+			userModel.setUserName(userName);
+			userModel=(UserModel) simpleSearchDao.find(userModel);
+			if(userModel.getId()==uId){
+				return "canNotDeleteCurrent";
+			}
+			simpleDeleteDao.delete(UserModel.class, uId);
+			return "ok";
+		}
+		return "notLogin";
 	}
 }

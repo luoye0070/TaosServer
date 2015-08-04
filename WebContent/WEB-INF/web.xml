@@ -118,4 +118,8 @@
     </param-value>
 </context-param>
 
+
+<!-- <listener>
+  <listener-class>com.lj.taosserver.listener.InitListener</listener-class>
+</listener> -->
 </web-app>
